@@ -101,7 +101,9 @@ public class SimpleClock extends JFrame implements ActionListener {
 
             } else if (e.getSource() == timeZone) {
                 if (time == timeFormat.format(Calendar.getInstance().getTime())) {
-                    //Set it to GMT
+                    timeFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                } else if (time != timeFormat.format(Calendar.getInstance().getTime())) {
+                    time = timeFormat.format(Calendar.getInstance().getTime());
                 }
             }
     }
