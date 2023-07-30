@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 
 public class SimpleClock extends JFrame implements ActionListener {
@@ -20,6 +21,7 @@ public class SimpleClock extends JFrame implements ActionListener {
         JLabel dayLabel;
         JLabel dateLabel;
         JButton militaryTime;
+        JButton timeZone;
         ActionListener listener;
         String time;
         String day;
@@ -30,6 +32,12 @@ public class SimpleClock extends JFrame implements ActionListener {
             militaryTime = new JButton("12 / 24");
             militaryTime.setBounds(100, 50, 50, 25);
             militaryTime.addActionListener(this);
+
+            timeZone = new JButton("Local / GMT");
+            timeZone.setBounds(150, 100, 100, 50);
+            timeZone.setVisible(true);
+            timeZone.addActionListener(this);
+
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.setTitle("Digital Clock");
             this.setLayout(new FlowLayout());
@@ -55,7 +63,7 @@ public class SimpleClock extends JFrame implements ActionListener {
             this.add(dateLabel);
             this.setVisible(true);
             this.add(militaryTime);
-
+            this.add(timeZone);
     
             setTimer();
         }
@@ -89,6 +97,11 @@ public class SimpleClock extends JFrame implements ActionListener {
                     this.timeFormat.applyPattern("HH:mm:ss a");
                 } else if (this.timeFormat.toPattern() == "HH:mm:ss a" ) {
                     this.timeFormat.applyPattern("hh:mm:ss a");
+                }
+
+            } else if (e.getSource() == timeZone) {
+                if (time == timeFormat.format(Calendar.getInstance().getTime())) {
+                    //Set it to GMT
                 }
             }
     }
